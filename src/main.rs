@@ -7,7 +7,7 @@ mod game;
 mod scenes;
 use game::run_game;
 
-#[macroquad::main("Fallen God")]
+#[macroquad::main("Begitxo Game 33")]
 async fn main() {
     run_game().await;
 }

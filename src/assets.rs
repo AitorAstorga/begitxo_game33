@@ -23,26 +23,15 @@ pub const SCENE_1_IRRITATED_4: &str = "./img/begitxo_irritated4.png";
 
 pub const SCENE_2_SUN: &str = "./img/begitxo_sun.png";
 
-pub const SCENE_1_2: &str = "./img/test_escena2.png";
-pub const SCENE_1_3: &str = "./img/test_escena3.png";
-pub const SCENE_1_4: &str = "./img/test_escena4.png";
 
-
-
-pub const SCENE_2: &str = "./img/test_escena2.png";
-pub const SCENE_2_1: &str = "./img/test_escena2.1.png";
 pub const SCENE_3: &str = "./img/test_escena3.png";
-pub const SCENE_3_1: &str = "./img/test_escena3.1.png";
-pub const SCENE_3_2: &str = "./img/test_escena3.2.png";
-pub const SCENE_3_3: &str = "./img/test_escena3.3.png";
-pub const SCENE_3_4: &str = "./img/test_escena3.4.png";
-pub const SCENE_4: &str = "./img/test_escena4.png";
 
 // ==========================
 // Sounds
 // ==========================
 
 pub const SCENE_1_MUSIC: &str = "./sound/scene1.ogg";
+pub const SCENE_1_AMBIENT: &str = "./sound/scene1_ambient.mp3";
 pub const SCENE_1_SHOCK: &str = "./sound/scene1_electric_shock.ogg";
 
 // ==========================

@@ -18,10 +18,20 @@ pub async fn scene1() {
         },
     );
 
+    let ambient_sound = load_sound(SCENE_1_AMBIENT).await.unwrap();
+    play_sound(
+        &ambient_sound,
+        PlaySoundParams {
+            looped: true,
+            volume: 0.5,
+        },
+    );
+
     scene1_zoom_from_back().await;
     scene1_options(&music).await;
 
     stop_sound(&music);
+    stop_sound(&ambient_sound);
 }
 
 /// Zoom from the back of Begitxo

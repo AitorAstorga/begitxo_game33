@@ -1,0 +1,7 @@
+- Improve the music stopping with a new function that slowly decreases it's volume over some 100s of milliseconds instead of the current hard stop_sound().
+- Fix position and size of images in zoom_over_time()
+- Fix positioning of text and background of buttons in TextButton and improve styling.
+- Add transition scene between scene1 and scene2
+- Design and create scene2 with Begitxo noticing the sun burning his eye and panicing about the sunglasses
+- Design and create scene3 with Org. helping Begitxo find his glasses but giving them normal glasses instead of sunglasses
+- Design and create scene4 with Begitxo noticing he had his sunglasses on his shirt all along
