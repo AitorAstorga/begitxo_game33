@@ -1,125 +1,108 @@
 // src/dialogue.rs
-use macroquad::prelude::*;
+use macroquad::{prelude::*, rand::rand};
 
-pub async fn draw_clean_texture(texture: Texture2D) {
+/// ---------------------------------------------------------------------------
+/// Small helpers
+/// ---------------------------------------------------------------------------
+
+/// Draw `texture` so it completely fills the window.
+fn draw_fullscreen(texture: &Texture2D, offset: Vec2, tint: Color) {
+    let dest_size = vec2(screen_width(), screen_height());
+    draw_texture_ex(
+        texture,
+        offset.x,
+        offset.y,
+        tint,
+        DrawTextureParams {
+            dest_size: Some(dest_size),
+            ..Default::default()
+        },
+    );
+}
+
+/// Draw the texture at its original size in the top‑left corner.
+async fn draw_clean_fullscreen(texture: &Texture2D) {
     clear_background(BLACK);
-    draw_texture(&texture, 0.0, 0.0, WHITE);
+    draw_fullscreen(texture, Vec2::ZERO, WHITE);
     next_frame().await;
 }
 
-/// Waits for a key to be pressed.
-async fn wait_for_key_press(texture: Texture2D, key: KeyCode) {
-    loop {
-        draw_clean_texture(texture.clone()).await;
-        if is_key_pressed(key) {
-            break;
-        }
-    }
-}
 
-/// Advances slides automatically after a fixed `interval` (in seconds).
-async fn auto_advance(texture: Texture2D, interval: f32) {
-    let start = get_time();
-    loop {
-        let elapsed = (get_time() - start) as f32;
-        if elapsed >= interval {
-            break;
-        }
-        draw_clean_texture(texture.clone()).await;
-    }
-}
+/// ---------------------------------------------------------------------------
+/// Effects
+/// ---------------------------------------------------------------------------
 
-/// Displays a series of images and waits for a key to be pressed in each.
-pub async fn show_slides_on_key(images: &[&str], key: KeyCode) {
-    for image_path in images.iter() {
-        let texture = load_texture(image_path).await.unwrap();
-        wait_for_key_press(texture, key).await;
-        // Texture is dropped here before loading the next image.
-    }
-}
-
-/// Displays a series of images, advancing automatically every `interval` seconds.
-pub async fn show_slides_auto(images: &[&str], interval: f32) {
-    for &path in images.iter() {
-        let texture = load_texture(path).await.unwrap();
-        auto_advance(texture, interval).await;
-    }
-}
-
-/// Zooms the given `texture` to `target_scale` over `duration` seconds.
-/// `target_scale` is a multiplier (e.g., 1.5 = 150% zoom).
+/// Zoom from “fill‑screen” to `target_scale ×` bigger over `duration` seconds.
+///
+/// `target_scale = 1.25` -> 25% bigger than the starting size.
 pub async fn zoom_over_time(texture: Texture2D, target_scale: f32, duration: f32) {
-    let start_time = get_time();
-    let initial_scale = 1.0;
-    let (screen_w, screen_h) = (screen_width(), screen_height());
-    let (tex_w, tex_h) = (texture.width(), texture.height());
+    let base_scale = {
+        let sx = screen_width() / texture.width();
+        let sy = screen_height() / texture.height();
+        sx.max(sy)
+    };
+
+    let start = get_time();
 
     loop {
-        let t = (get_time() - start_time) as f32;
-        let progress = (t / duration).min(1.0);
-        let scale = initial_scale + (target_scale - initial_scale) * progress;
+        let t = ((get_time() - start) as f32 / duration).clamp(0.0, 1.0);
 
-        let draw_w = tex_w * scale;
-        let draw_h = tex_h * scale;
-        let x = (screen_w - draw_w) / 2.0;
-        let y = (screen_h - draw_h) / 2.0;
+        let scale = base_scale * (1.0 + (target_scale - 1.0) * t);
+        let size  = vec2(texture.width() * scale, texture.height() * scale);
+        let pos   = vec2((screen_width()  - size.x) * 0.5,
+                         (screen_height() - size.y) * 0.5);
 
         clear_background(BLACK);
         draw_texture_ex(
             &texture,
-            x,
-            y,
+            pos.x,
+            pos.y,
             WHITE,
             DrawTextureParams {
-                dest_size: Some(Vec2::new(draw_w, draw_h)),
+                dest_size: Some(size),
                 ..Default::default()
             },
         );
         next_frame().await;
 
-        if progress >= 1.0 {
-            break;
-        }
+        if t >= 1.0 { break; }
     }
 }
 
+/// Fade the picture in over `secs` seconds.
 pub async fn fade_in_texture(texture: &Texture2D, secs: f32) {
     let mut elapsed = 0.0;
 
     while elapsed < secs {
-        // Interpolate α from 0.0 ➜ 1.0
         let alpha = (elapsed / secs).clamp(0.0, 1.0);
-
         clear_background(BLACK);
-
-        // Draw centred, full‑screen (adjust if you need another layout)
-        let (w, h) = (screen_width(), screen_height());
-        macroquad::texture::draw_texture_ex(
-            texture,
-            0.0,
-            0.0,
-            Color::new(1.0, 1.0, 1.0, alpha),
-            macroquad::texture::DrawTextureParams {
-                dest_size: Some(vec2(w, h)),
-                ..Default::default()
-            },
-        );
-
+        draw_fullscreen(texture, Vec2::ZERO, Color::new(1.0, 1.0, 1.0, alpha));
         next_frame().await;
         elapsed += get_frame_time();
     }
 
-    // Ensure final opaque frame is shown
-    clear_background(BLACK);
-    macroquad::texture::draw_texture_ex(
-        texture,
-        0.0,
-        0.0,
-        WHITE,
-        macroquad::texture::DrawTextureParams {
-            dest_size: Some(vec2(screen_width(), screen_height())),
-            ..Default::default()
-        },
-    );
-    next_frame().await;
+    draw_clean_fullscreen(texture).await;
+}
+
+/// Shake the whole screen for `secs` seconds.
+///
+/// * `amount` – maximum offset in **pixels**.
+/// * `speed`  – shakes per second (frequency).
+pub async fn shake_texture(texture: &Texture2D, secs: f32, amount: f32, speed: f32) {
+    let mut elapsed = 0.0;
+
+    while elapsed < secs {
+        let rng = rand() as f32;
+        let angle  = elapsed * speed * rng;
+        let offset = vec2(angle.sin() * amount, angle.cos() * amount);
+
+        clear_background(BLACK);
+        draw_fullscreen(texture, offset, WHITE);
+        next_frame().await;
+
+        elapsed += get_frame_time();
+    }
+
+    // Recenter the texture
+    draw_clean_fullscreen(texture).await;
 }

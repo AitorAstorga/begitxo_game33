@@ -1,6 +1,6 @@
 use crate::{
     assets::*,
-    dialogue::zoom_over_time, gui::text_button::TextButton,
+    dialogue::{shake_texture, zoom_over_time}, gui::text_button::TextButton,
 };
 use macroquad::{
     audio::{
@@ -110,9 +110,12 @@ async fn scene1_irritated_eyes(path: &str, duration: f32) -> Texture2D {
 async fn scene1_electric_shock(music: &Sound) {
     stop_sound(music);
 
-    let sound_shock = load_sound(SCENE_1_SHOCK).await.unwrap();
+    let sound_shock = load_sound(SCENE_1_SHOCK_SOUND).await.unwrap();
     play_sound_once(&sound_shock);
 
-    let texture = load_texture(SCENE_3).await.unwrap();
-    zoom_over_time(texture, 1.5, 2.0).await;
+    let texture1 = load_texture(SCENE_1_SHOCK_1).await.unwrap();
+    zoom_over_time(texture1, 1.5, 2.0).await;
+
+    let texture2 = load_texture(SCENE_1_SHOCK_2).await.unwrap();
+    shake_texture(&texture2, 1.5, 20.0, 2.0).await;
 }
