@@ -1,4 +1,5 @@
 // src/main.rs
+mod gui;
 mod types;
 mod assets;
 mod dialogue;

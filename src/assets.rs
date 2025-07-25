@@ -15,7 +15,14 @@ pub const SCREEN_HEIGHT: f32 = 480.0;
 // ==========================
 // Maps and Backgrounds
 // ==========================
-pub const SCENE_1_1: &str = "./img/begitxo_back.png";
+pub const SCENE_1_BACK: &str = "./img/begitxo_back.png";
+pub const SCENE_1_IRRITATED_1: &str = "./img/begitxo_irritated1.png";
+pub const SCENE_1_IRRITATED_2: &str = "./img/begitxo_irritated2.png";
+pub const SCENE_1_IRRITATED_3: &str = "./img/begitxo_irritated3.png";
+pub const SCENE_1_IRRITATED_4: &str = "./img/begitxo_irritated4.png";
+
+pub const SCENE_2_SUN: &str = "./img/begitxo_sun.png";
+
 pub const SCENE_1_2: &str = "./img/test_escena2.png";
 pub const SCENE_1_3: &str = "./img/test_escena3.png";
 pub const SCENE_1_4: &str = "./img/test_escena4.png";

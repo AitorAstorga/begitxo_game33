@@ -82,3 +82,44 @@ pub async fn zoom_over_time(texture: Texture2D, target_scale: f32, duration: f32
         }
     }
 }
+
+pub async fn fade_in_texture(texture: &Texture2D, secs: f32) {
+    let mut elapsed = 0.0;
+
+    while elapsed < secs {
+        // Interpolate α from 0.0 ➜ 1.0
+        let alpha = (elapsed / secs).clamp(0.0, 1.0);
+
+        clear_background(BLACK);
+
+        // Draw centred, full‑screen (adjust if you need another layout)
+        let (w, h) = (screen_width(), screen_height());
+        macroquad::texture::draw_texture_ex(
+            texture,
+            0.0,
+            0.0,
+            Color::new(1.0, 1.0, 1.0, alpha),
+            macroquad::texture::DrawTextureParams {
+                dest_size: Some(vec2(w, h)),
+                ..Default::default()
+            },
+        );
+
+        next_frame().await;
+        elapsed += get_frame_time();
+    }
+
+    // Ensure final opaque frame is shown
+    clear_background(BLACK);
+    macroquad::texture::draw_texture_ex(
+        texture,
+        0.0,
+        0.0,
+        WHITE,
+        macroquad::texture::DrawTextureParams {
+            dest_size: Some(vec2(screen_width(), screen_height())),
+            ..Default::default()
+        },
+    );
+    next_frame().await;
+}
