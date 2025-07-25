@@ -1,0 +1,92 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Begitxo Game 33</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: black;
+            overflow: hidden;
+        }
+
+        #glcanvas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 640px;
+            height: 480px;
+            border: 20px solid white;
+            border-radius: 5px;
+        }
+
+        canvas {
+            width: 640px;
+            height: 480px;
+        }
+
+        #credits {
+            color: rgb(255, 255, 255);
+            width: 620px;
+            padding-left: 20px;
+            background-color: rgba(0, 0, 0, 0.527);
+            border: 20px solid white;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .center {
+            padding-inline: 30%
+        }
+
+        .names {
+            color: rgb(255, 255, 255);
+            text-align: left;
+            font-weight: bold;
+            list-style-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M18 4c-4-1-6 3-6 3s-2-4-6-3-4 6-2 8l8 8 8-8c2-2 2-7-2-8z"></path></svg>');
+        }
+
+        li::marker{
+            font-size: 2em;
+            line-height: 0.2;
+        }
+
+        h3 {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="glcanvas" tabindex="1"></canvas>
+
+    <div id="credits">
+        <h2>Credits</h2>
+        <div class="center">
+            <h3>Original game developed by:</h3>
+                <ul>
+                    <li class="names">Aitor Astorga Saez de Vicuña</li>
+                    <li class="names">Sky</li>
+                    <li class="names">Lassy</li>
+                </ul>
+        </div>
+    </div>
+
+    <!-- Minified and statically hosted version of https://github.com/not-fl3/macroquad/blob/master/js/mq_js_bundle.js -->
+    <script src="https://not-fl3.github.io/miniquad-samples/mq_js_bundle.js"></script>
+    <script>load("./begitxo_game33.wasm");</script> <!-- Your compiled wasm file -->
+    <script>load("./target/wasm32-unknown-unknown/release/begitxo_game33.wasm");</script> <!-- Your compiled wasm file -->
+</body>
+
+</html>

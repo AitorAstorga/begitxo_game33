@@ -1,0 +1,43 @@
+// src/assets.rs
+
+pub struct Image {
+    pub path: &'static str,
+    pub width: f32,
+    pub height: f32,
+}
+
+// ==========================
+// Dimensions
+// ==========================
+pub const SCREEN_WIDTH: f32 = 640.0;
+pub const SCREEN_HEIGHT: f32 = 480.0;
+
+// ==========================
+// Maps and Backgrounds
+// ==========================
+pub const SCENE_1_1: &str = "./img/begitxo_back.png";
+pub const SCENE_1_2: &str = "./img/test_escena2.png";
+pub const SCENE_1_3: &str = "./img/test_escena3.png";
+pub const SCENE_1_4: &str = "./img/test_escena4.png";
+
+
+
+pub const SCENE_2: &str = "./img/test_escena2.png";
+pub const SCENE_2_1: &str = "./img/test_escena2.1.png";
+pub const SCENE_3: &str = "./img/test_escena3.png";
+pub const SCENE_3_1: &str = "./img/test_escena3.1.png";
+pub const SCENE_3_2: &str = "./img/test_escena3.2.png";
+pub const SCENE_3_3: &str = "./img/test_escena3.3.png";
+pub const SCENE_3_4: &str = "./img/test_escena3.4.png";
+pub const SCENE_4: &str = "./img/test_escena4.png";
+
+// ==========================
+// Sounds
+// ==========================
+
+pub const SCENE_1_MUSIC: &str = "./sound/scene1.ogg";
+pub const SCENE_1_SHOCK: &str = "./sound/scene1_electric_shock.ogg";
+
+// ==========================
+// Menu and Other UI Images
+// ==========================
