@@ -14,13 +14,6 @@ pub struct CorridorScroller {
 }
 
 impl CorridorScroller {
-    pub async fn new(path: &str, speed: f32, dir: ScrollDir, tiles: usize) -> Result<Self,String> {
-        assert!(speed >= 0.0 && tiles >= 1);
-        let tex = load_texture(path).await.map_err(|e| format!("load {path}: {e}"))?;
-        tex.set_filter(FilterMode::Nearest);
-        Ok(Self { w: tex.width(), tex, x: 0.0, speed, dir, loops_goal: tiles, loops_done: 0 })
-    }
-
     pub fn from_texture(tex: Texture2D, speed: f32, dir: ScrollDir, tiles: usize) -> Self {
         assert!(speed >= 0.0 && tiles >= 1);
         tex.set_filter(FilterMode::Nearest);
@@ -41,6 +34,4 @@ impl CorridorScroller {
         let other_x = if self.dir == ScrollDir::Left { self.x + self.w } else { self.x - self.w };
         draw_texture(&self.tex, other_x, 0.0, WHITE);
     }
-
-    #[inline] pub fn tick(&mut self) { self.update(); self.draw(); }
 }

@@ -27,13 +27,6 @@ pub async fn draw_clean_fullscreen(texture: &Texture2D) {
     next_frame().await;
 }
 
-/// Draw an empty background with a text and the given colors and dimensions.
-async fn draw_text_background(text: &str, color: Color, pos: Vec2, font_size: f32) {
-    clear_background(BLACK);
-    draw_text(text, pos.x, pos.y, font_size, color);
-    next_frame().await;
-}
-
 pub async fn are_keys_pressed(keys: &[KeyCode]) -> bool {
     for key in keys {
         if is_key_pressed(*key) {

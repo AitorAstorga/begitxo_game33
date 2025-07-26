@@ -1,5 +1,4 @@
 // src/gui/text_box.rs
-
 use macroquad::{color::{Color, BLACK, WHITE}, math::{vec2, Vec2}, text::{draw_text_ex, measure_text, TextParams}, window::{clear_background, next_frame, screen_height, screen_width}};
 
 /// Tweaks for drawing a paragraph of text.
@@ -38,9 +37,6 @@ impl Default for TextBoxOpts {
 /// One frame is produced, but the `async` keeps the same call style as
 /// your other helpers.
 pub async fn draw_text_background(text: &str, opts: TextBoxOpts) {
-    // -----------------------------------------------------------------------
-    // Word‑wrap ----------------------------------------------------------------
-    // -----------------------------------------------------------------------
     let mut lines: Vec<String> = Vec::new();
     let mut current = String::new();
 
@@ -67,7 +63,7 @@ pub async fn draw_text_background(text: &str, opts: TextBoxOpts) {
     }
 
     // -----------------------------------------------------------------------
-    // Positioning / centring -------------------------------------------------
+    // Positioning / Centering
     // -----------------------------------------------------------------------
     let line_height = opts.font_size as f32 * 1.25;
     let para_height = line_height * lines.len() as f32;
@@ -79,7 +75,7 @@ pub async fn draw_text_background(text: &str, opts: TextBoxOpts) {
     };
 
     // -----------------------------------------------------------------------
-    // Draw -------------------------------------------------------------------
+    // Draw
     // -----------------------------------------------------------------------
     clear_background(BLACK);
 

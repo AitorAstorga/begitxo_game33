@@ -47,7 +47,6 @@ pub async fn scene1_options(music: &Sound) -> GamePhase {
     let mut texture = load_texture(SCENE_1_BACK).await.unwrap();
 
     let font_size = 30;
-    let pad = 12.0;
 
     let screen_w = screen_width();
     let screen_h = screen_height();
@@ -66,8 +65,8 @@ pub async fn scene1_options(music: &Sound) -> GamePhase {
     loop {
         draw_clean_fullscreen(&texture).await;
 
-        let sleep_btn = TextButton::new("Ir a dormir", sleep_positions[dodge_idx], font_size);
-        let (sleep_hovered, sleep_clicked) = sleep_btn.draw(pad);
+        let mut sleep_btn = TextButton::new("Ir a dormir", sleep_positions[dodge_idx], font_size);
+        let (sleep_hovered, sleep_clicked) = sleep_btn.draw();
 
         if sleep_hovered && !sleep_clicked && dodge_idx < sleep_positions.len() - 1 {
             dodge_idx += 1; // dodge next frame
@@ -76,8 +75,8 @@ pub async fn scene1_options(music: &Sound) -> GamePhase {
             return GamePhase::Scene1Shock;
         }
         
-        let play_btn = TextButton::new("Seguir jugando", play_pos, font_size);
-        let (_, play_clicked) = play_btn.draw(pad);
+        let mut play_btn = TextButton::new("Seguir jugando", play_pos, font_size);
+        let (_, play_clicked) = play_btn.draw();
 
         if play_clicked {
             play_clicks += 1;

@@ -55,7 +55,9 @@ pub async fn run_game() {
             game_phase = scene3().await;
         }
 
-        
+        if game_phase == GamePhase::Scene3Win {
+            break;            
+        }
         
     }
 }
