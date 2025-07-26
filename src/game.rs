@@ -4,7 +4,7 @@ use crate::{dialogue::are_keys_pressed, gui::text_box::{draw_text_background, Te
 
 pub async fn run_game() {
     let mut game_phase: GamePhase;
-    scene3().await;
+
     loop {                
         // Scene 1
         game_phase = scene1().await;
