@@ -38,7 +38,7 @@ impl Player {
     }
 
     pub fn hitbox(&self) -> Rect {
-        let w = PLAYER_SIZE.x * HITBOX_SCALE - 12.0;
+        let w = PLAYER_SIZE.x * HITBOX_SCALE - 125.0;
         let h = PLAYER_SIZE.y - 3.0;
         let dx = (PLAYER_SIZE.x - w) * 0.5;
         let dy = (PLAYER_SIZE.y - h) * 0.5;
