@@ -28,7 +28,7 @@ pub async fn scene1() -> GamePhase {
     );
 
     scene1_zoom_from_back().await;
-    let result = scene1_options(&music).await;
+    let result = scene1_options(&music, &ambient_sound).await;
 
     stop_sound(&music);
     stop_sound(&ambient_sound);
@@ -43,7 +43,7 @@ async fn scene1_zoom_from_back() {
 }
 
 /// Path to sleeping or staying awake
-pub async fn scene1_options(music: &Sound) -> GamePhase {
+pub async fn scene1_options(music: &Sound, ambient_sound: &Sound) -> GamePhase {
     let mut texture = load_texture(SCENE_1_BACK).await.unwrap();
 
     let font_size = 30;
@@ -71,6 +71,8 @@ pub async fn scene1_options(music: &Sound) -> GamePhase {
         if sleep_hovered && !sleep_clicked && dodge_idx < sleep_positions.len() - 1 {
             dodge_idx += 1; // dodge next frame
         } else if sleep_clicked {
+            stop_sound(&music);
+            stop_sound(&ambient_sound);
             scene1_electric_shock(music).await;
             return GamePhase::Scene1Shock;
         }

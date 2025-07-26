@@ -1,9 +1,6 @@
 // src/scenes/scene2.rs
 use macroquad::{
-    color::{BLACK, WHITE},
-    input::KeyCode,
-    prelude::*,
-    rand::{gen_range, rand, srand},
+    audio::{load_sound, play_sound, stop_sound, PlaySoundParams}, color::{BLACK, WHITE}, input::KeyCode, prelude::*, rand::{gen_range, rand, srand}
 };
 
 use crate::{
@@ -16,8 +13,20 @@ use crate::{
 
 pub async fn scene2() -> GamePhase {
     let mut game_phase: GamePhase = GamePhase::Scene2Dialogue;
+
+    let music = load_sound(SCENE_2_AMBIENT).await.unwrap();
+    play_sound(
+        &music,
+        PlaySoundParams {
+            looped: false,
+            volume: 1.0,
+        },
+    );
+
     let texture_sun = load_texture(SCENE_2_SUN).await.unwrap();
     fade_in_texture(&texture_sun, 3.5).await;
+
+    stop_sound(&music);
 
     loop {
         draw_text_background(

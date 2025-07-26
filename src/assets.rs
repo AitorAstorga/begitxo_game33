@@ -46,8 +46,9 @@ pub const SCENE_2_OBSTACLE_2: &str = "./img/race/obstacle2.png";
 // ==========================
 
 pub const SCENE_1_MUSIC: &str = "./sound/scene1.ogg";
-pub const SCENE_1_AMBIENT: &str = "./sound/scene1_ambient.ogg"; // TO DO: ERROR WITH MP3 IN SOME SYSTEMS BECAUSE YES "./sound/scene1_ambient.mp3";
+pub const SCENE_1_AMBIENT: &str = "./sound/scene1_ambient.ogg";
 pub const SCENE_1_SHOCK_SOUND: &str = "./sound/scene1_electric_shock.ogg";
+pub const SCENE_2_AMBIENT: &str = "./sound/scene2_ambient.ogg";
 
 // ==========================
 // Menu and Other UI Images
