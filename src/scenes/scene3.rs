@@ -53,7 +53,7 @@ pub async fn scene3() -> GamePhase {
 
     loop {
         draw_text_background(
-            "Begitxo siempre tuvo sus gafas, más no pudo percatarse, tan ocupado se hayaba en la party.",
+            "Begitxo siempre tuvo sus gafas, más no pudo percatarse, tan ocupado se hallaba en la party.",
             TextBoxOpts {
                 font_size: 50,
                 color: WHITE,
