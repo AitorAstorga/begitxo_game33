@@ -24,6 +24,10 @@ pub const SCENE_2_RACE: &str = "./img/race/corridor.png";
 pub const SCENE_3_REALIZE_1 : &str = "./img/begitxo_realize1.png";
 pub const SCENE_3_REALIZE_2 : &str = "./img/begitxo_realize2.png";
 pub const SCENE_3_REALIZE_3 : &str = "./img/begitxo_realize3.png";
+pub const SCENE_3_REALIZE_4 : &str = "./img/begitxo_realize4.png";
+pub const SCENE_3_REALIZE_5 : &str = "./img/begitxo_realize5.png";
+pub const SCENE_3_REALIZE_6 : &str = "./img/begitxo_realize6.png";
+pub const SCENE_3_REALIZE_7 : &str = "./img/begitxo_realize7.png";
 
 // ==========================
 // Player Images
