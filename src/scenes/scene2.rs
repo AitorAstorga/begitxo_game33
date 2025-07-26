@@ -88,7 +88,19 @@ pub async fn scene2() -> GamePhase {
         clear_background(BLACK);
         scroller.draw();
         player.draw();
-        for o in &obstacles { o.draw(); }
+        for o in &obstacles { 
+            o.draw(); 
+            // DEBUG: draw the obstacle's hitbox
+            //let r = o.rect();
+            //draw_rectangle_lines(
+            //    r.x, r.y, r.w, r.h,
+            //    2.0,   // line thickness
+            //    RED,  // color
+            //);
+        }
+        // DEBUG: draw the player's hitbox
+        //let pr = player.hitbox();
+        //draw_rectangle_lines(pr.x, pr.y, pr.w, pr.h, 2.0, BLUE);
 
         if game_phase == GamePhase::Scene2Collision {
             draw_text_ex(

@@ -27,7 +27,7 @@ impl Obstacle {
 
     pub fn rect(&self) -> Rect {
         Rect::new(
-            self.x,
+            self.x - 3.0,
             GROUND_Y + PLAYER_SIZE.y - self.size.y,
             self.size.x,
             self.size.y,

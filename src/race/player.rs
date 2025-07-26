@@ -6,6 +6,7 @@ use macroquad::{
 };
 
 use crate::race::{GRAVITY, GROUND_Y, HITBOX_SCALE, JUMP_VELOCITY, PLAYER_SIZE, PLAYER_X};
+
 pub struct Player {
     tex: Texture2D,
     y: f32,
@@ -37,11 +38,11 @@ impl Player {
     }
 
     pub fn hitbox(&self) -> Rect {
-        let w = PLAYER_SIZE.x * HITBOX_SCALE;
-        let h = PLAYER_SIZE.y * HITBOX_SCALE;
+        let w = PLAYER_SIZE.x * HITBOX_SCALE - 12.0;
+        let h = PLAYER_SIZE.y - 3.0;
         let dx = (PLAYER_SIZE.x - w) * 0.5;
         let dy = (PLAYER_SIZE.y - h) * 0.5;
-        Rect::new(PLAYER_X + dx, self.y + dy, w, h)
+        Rect::new(PLAYER_X + dx, self.y + dy, w, h,)
     }
 
     pub fn draw(&self) {
