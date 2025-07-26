@@ -10,7 +10,8 @@ use crate::{
     assets::*,
     dialogue::*,
     gui::text_box::{draw_text_background, TextBoxOpts},
-    race::{corridor::{CorridorScroller, ScrollDir}, obstacle::Obstacle, player::Player}, types::GamePhase,
+    race::{corridor::{CorridorScroller, ScrollDir}, obstacle::Obstacle, player::Player}, 
+    types::GamePhase,
 };
 
 pub async fn scene2() -> GamePhase {
@@ -31,7 +32,8 @@ pub async fn scene2() -> GamePhase {
     let race_tex  = load_texture(SCENE_2_RACE).await.unwrap();
     let mut scroller = CorridorScroller::from_texture(race_tex, 350.0, ScrollDir::Right, 2);
     let player_tex   = load_texture(SCENE_2_PLAYER).await.unwrap();
-    let mut player   = Player::new(player_tex);
+    let spawn_x = screen_width() * 0.7;
+    let mut player = Player::new(player_tex, spawn_x);
 
     let obstacle_defs = &[
         (load_texture(SCENE_2_OBSTACLE_1).await.unwrap(), Vec2::new(45.0, 61.0)),

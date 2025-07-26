@@ -5,18 +5,20 @@ use macroquad::{
     texture::{draw_texture_ex, DrawTextureParams, Texture2D},
 };
 
-use crate::race::{GRAVITY, GROUND_Y, HITBOX_SCALE, JUMP_VELOCITY, PLAYER_SIZE, PLAYER_X};
+use crate::race::{GRAVITY, GROUND_Y, HITBOX_SCALE, JUMP_VELOCITY, PLAYER_SIZE};
 
 pub struct Player {
     tex: Texture2D,
+    x: f32,
     y: f32,
     vy: f32,
 }
 
 impl Player {
-    pub fn new(tex: Texture2D) -> Self {
+    pub fn new(tex: Texture2D, x: f32) -> Self {
         Self {
             tex,
+            x,
             y: GROUND_Y,
             vy: 0.0,
         }
@@ -42,13 +44,13 @@ impl Player {
         let h = PLAYER_SIZE.y - 3.0;
         let dx = (PLAYER_SIZE.x - w) * 0.5;
         let dy = (PLAYER_SIZE.y - h) * 0.5;
-        Rect::new(PLAYER_X + dx, self.y + dy, w, h,)
+        Rect::new(self.x + dx, self.y + dy, w, h)
     }
 
     pub fn draw(&self) {
         draw_texture_ex(
             &self.tex,
-            PLAYER_X,
+            self.x,
             self.y,
             WHITE,
             DrawTextureParams {
