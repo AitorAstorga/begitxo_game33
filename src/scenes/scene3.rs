@@ -1,7 +1,7 @@
 
 /// src/scenes/scene3.rs
 use macroquad::{
-    color::WHITE, input::KeyCode, texture::load_texture, window::screen_width
+    color::WHITE, input::KeyCode, texture::load_texture, window::{next_frame, screen_width}
 };
 
 use crate::{
@@ -53,18 +53,22 @@ pub async fn scene3() -> GamePhase {
 
     let begitxo_realize4 = load_texture(SCENE_3_REALIZE_4).await.unwrap();
     draw_clean_fullscreen(&begitxo_realize4.clone()).await;
+    next_frame().await;
 
     std::thread::sleep(std::time::Duration::from_millis(200));
     let begitxo_realize5 = load_texture(SCENE_3_REALIZE_5).await.unwrap();
     draw_clean_fullscreen(&begitxo_realize5.clone()).await;
+    next_frame().await;
 
     std::thread::sleep(std::time::Duration::from_millis(200));
     let begitxo_realize6 = load_texture(SCENE_3_REALIZE_6).await.unwrap();
     draw_clean_fullscreen(&begitxo_realize6.clone()).await;
+    next_frame().await;
 
     std::thread::sleep(std::time::Duration::from_millis(200));
     let begitxo_realize7 = load_texture(SCENE_3_REALIZE_7).await.unwrap();
     draw_clean_fullscreen(&begitxo_realize7.clone()).await;
+    next_frame().await;
 
     loop {
         draw_text_background(

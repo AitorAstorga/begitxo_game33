@@ -24,7 +24,6 @@ fn draw_fullscreen(texture: &Texture2D, offset: Vec2, tint: Color) {
 pub async fn draw_clean_fullscreen(texture: &Texture2D) {
     clear_background(BLACK);
     draw_fullscreen(texture, Vec2::ZERO, WHITE);
-    next_frame().await;
 }
 
 pub async fn are_keys_pressed(keys: &[KeyCode]) -> bool {
