@@ -24,7 +24,14 @@ pub async fn scene2() -> GamePhase {
     );
 
     let texture_sun = load_texture(SCENE_2_SUN).await.unwrap();
+
     fade_in_texture(&texture_sun, 3.5).await;
+
+    // Preload the race textures so they don't get loaded after you press Enter
+    let race_tex        = load_texture(SCENE_2_RACE).await.unwrap();
+    let player_tex      = load_texture(SCENE_2_PLAYER).await.unwrap();
+    let obstacle_tex_1  = load_texture(SCENE_2_OBSTACLE_1).await.unwrap();
+    let obstacle_tex_2  = load_texture(SCENE_2_OBSTACLE_2).await.unwrap();
 
     stop_sound(&music);
 
@@ -38,15 +45,13 @@ pub async fn scene2() -> GamePhase {
         }
     }
 
-    let race_tex  = load_texture(SCENE_2_RACE).await.unwrap();
     let mut scroller = CorridorScroller::from_texture(race_tex, 350.0, ScrollDir::Right, 2);
-    let player_tex   = load_texture(SCENE_2_PLAYER).await.unwrap();
     let spawn_x = screen_width() * 0.7;
     let mut player = Player::new(player_tex, spawn_x);
 
     let obstacle_defs = &[
-        (load_texture(SCENE_2_OBSTACLE_1).await.unwrap(), Vec2::new(45.0, 61.0)),
-        (load_texture(SCENE_2_OBSTACLE_2).await.unwrap(), Vec2::new(90.0, 122.0)),
+        (obstacle_tex_1, Vec2::new(45.0, 61.0)),
+        (obstacle_tex_2, Vec2::new(90.0, 122.0)),
         // TO DO: Add more obstacles
     ];
 
