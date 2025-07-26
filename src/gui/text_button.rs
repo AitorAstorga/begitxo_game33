@@ -20,7 +20,7 @@ pub struct ButtonStyle {
 impl Default for ButtonStyle {
     fn default() -> Self {
         Self {
-            padding: 6.0,
+            padding: 10.0,
             text_color: BLACK,
             bg: WHITE,
             bg_hover: GRAY,
