@@ -1,6 +1,6 @@
 // src/game.rs
-use macroquad::{color::WHITE, input::{is_key_pressed, KeyCode}, window::screen_width};
-use crate::{gui::text_box::{draw_text_background, TextBoxOpts}, scenes::{scene1::scene1, scene2::scene2}, types::GamePhase};
+use macroquad::{color::WHITE, input::KeyCode, window::screen_width};
+use crate::{dialogue::are_keys_pressed, gui::text_box::{draw_text_background, TextBoxOpts}, scenes::{scene1::scene1, scene2::scene2, scene3::scene3}, types::GamePhase};
 
 pub async fn run_game() {
     let mut game_phase: GamePhase;
@@ -8,7 +8,7 @@ pub async fn run_game() {
         // Scene 1
         game_phase = scene1().await;
 
-        if game_phase == GamePhase::scene1_shock {
+        if game_phase == GamePhase::Scene1Shock {
             loop {
                 draw_text_background(
                     "Begitxo intenta desconectar su puesto antes de dormir. Descansa en paz, Begitxo. (pulsa Escape para salir)",
@@ -21,7 +21,7 @@ pub async fn run_game() {
                 )
                 .await;
 
-                if is_key_pressed(KeyCode::Escape) {
+                if are_keys_pressed(&[KeyCode::Escape, KeyCode::Enter]).await  {
                     break;
                 }
             }
@@ -42,7 +42,7 @@ pub async fn run_game() {
             )
             .await;
 
-            if is_key_pressed(KeyCode::Enter) {
+            if are_keys_pressed(&[KeyCode::Escape, KeyCode::Enter]).await  {
                 break;
             }
         }
@@ -50,44 +50,12 @@ pub async fn run_game() {
         // Scene 2
         game_phase = scene2().await;
 
-        if game_phase == GamePhase::scene2_race {
-            // TO DO: All this code to scene3
-            loop {
-                draw_text_background(
-                    "Begitxo sube al escenario y grita desesperado por que le ayuden a buscar sus gafas. (pulsa Enter para continuar)",
-                    TextBoxOpts {
-                        font_size: 50,
-                        color: WHITE,
-                        max_width: screen_width() * 0.8,
-                        ..Default::default()
-                    },
-                )
-                .await;
 
-                if is_key_pressed(KeyCode::Enter) {
-                    break;
-                }
-            }
-            loop {
-                draw_text_background(
-                    "La party responde y le piden que se fije en su camiseta. (pulsa Enter para continuar)",
-                    TextBoxOpts {
-                        font_size: 50,
-                        color: WHITE,
-                        max_width: screen_width() * 0.8,
-                        ..Default::default()
-                    },
-                )
-                .await;
-
-                if is_key_pressed(KeyCode::Enter) {
-                    break;
-                }
-            }
-            // TO DO: Create begitxo in escenario to be zoomed in
-            //let begitxo = load_texture(SCENE3_BEGITXO).await.unwrap();
-            // zoom_over_time(texture.clone(), 1.5, duration).await;
+        if game_phase == GamePhase::Scene2Race {
+            game_phase = scene3().await;
         }
+
+        
         
     }
 }

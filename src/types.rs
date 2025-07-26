@@ -2,10 +2,10 @@
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 pub enum GamePhase {
-    scene1_shock,
-    scene1_awake,
-    scene2_dialogue,
-    scene2_race,
-    scene2_collision,
-    Win,
+    Scene1Shock,
+    Scene1Awake,
+    Scene2Dialogue,
+    Scene2Race,
+    Scene2Collision,
+    Scene3Win,
 }

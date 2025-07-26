@@ -34,6 +34,15 @@ async fn draw_text_background(text: &str, color: Color, pos: Vec2, font_size: f3
     next_frame().await;
 }
 
+pub async fn are_keys_pressed(keys: &[KeyCode]) -> bool {
+    for key in keys {
+        if is_key_pressed(*key) {
+            return true;
+        }
+    }
+    false
+}
+
 /// ---------------------------------------------------------------------------
 /// Effects
 /// ---------------------------------------------------------------------------
@@ -112,3 +121,4 @@ pub async fn shake_texture(texture: &Texture2D, secs: f32, amount: f32, speed: f
     // Recenter the texture
     draw_clean_fullscreen(texture).await;
 }
+

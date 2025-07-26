@@ -1,7 +1,7 @@
 // src/scenes/scene2.rs
 use macroquad::{
     color::{BLACK, WHITE},
-    input::{is_key_pressed, KeyCode},
+    input::KeyCode,
     prelude::*,
     rand::{gen_range, rand, srand},
 };
@@ -14,16 +14,18 @@ use crate::{
 };
 
 pub async fn scene2() -> GamePhase {
-    let mut game_phase: GamePhase = GamePhase::scene2_dialogue;
+    let mut game_phase: GamePhase = GamePhase::Scene2Dialogue;
     let texture_sun = load_texture(SCENE_2_SUN).await.unwrap();
     fade_in_texture(&texture_sun, 3.5).await;
 
     loop {
         draw_text_background(
-            "Pronto, el Sol abrasador quemará el ojo de Begitxo. A menos que... ¿DÓNDE ESTÁN SUS GAFAS?\nCorre hacia los chalecos rojos y esquiva los obstáculos. Salta con W o Espacio. (Enter)",
+            "Pronto, el Sol abrasador quemará el ojo de Begitxo. A menos que... ¿DÓNDE ESTÁN SUS GAFAS? Corre hacia el escenario y esquiva los obstáculos. Salta con W o Espacio. (Enter)",
             TextBoxOpts { font_size: 50, color: WHITE, max_width: screen_width()*0.8, ..Default::default() },
         ).await;
-        if is_key_pressed(KeyCode::Enter) { break; }
+        if are_keys_pressed(&[KeyCode::Escape, KeyCode::Enter]).await  {
+            break; 
+        }
     }
 
     let race_tex  = load_texture(SCENE_2_RACE).await.unwrap();
@@ -44,21 +46,21 @@ pub async fn scene2() -> GamePhase {
     loop {
         let dt = get_frame_time();
 
-        if game_phase == GamePhase::scene2_race { scroller.update(); } // move background
+        if game_phase == GamePhase::Scene2Race { scroller.update(); } // move background
         if scroller.finished() { break; } // end of race
 
-        if game_phase == GamePhase::scene2_race {
-            if is_key_pressed(KeyCode::Space) || is_key_pressed(KeyCode::W) { 
+        if game_phase == GamePhase::Scene2Race {
+            if are_keys_pressed(&[KeyCode::Space, KeyCode::W]).await  { 
                 player.jump();
             }
-        } else if is_key_pressed(KeyCode::Enter) {
+        } else if are_keys_pressed(&[KeyCode::Escape, KeyCode::Enter]).await  {
             player.reset();
             obstacles.clear();
             spawn_timer = 1.0;
-            game_phase = GamePhase::scene2_race
+            game_phase = GamePhase::Scene2Race
         }
 
-        if game_phase == GamePhase::scene2_race {
+        if game_phase == GamePhase::Scene2Race {
             player.update(dt);
 
             // spawn
@@ -79,7 +81,7 @@ pub async fn scene2() -> GamePhase {
 
             // collision
             if obstacles.iter().any(|o| o.rect().overlaps(&player.hitbox())) { 
-                game_phase = GamePhase::scene2_collision;
+                game_phase = GamePhase::Scene2Collision;
             }
         }
 
@@ -88,7 +90,7 @@ pub async fn scene2() -> GamePhase {
         player.draw();
         for o in &obstacles { o.draw(); }
 
-        if game_phase == GamePhase::scene2_collision {
+        if game_phase == GamePhase::Scene2Collision {
             draw_text_ex(
                 "¡Choque!  Enter = Reiniciar",
                 screen_width()*0.5 - 260.0,

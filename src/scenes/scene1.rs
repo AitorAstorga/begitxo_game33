@@ -1,11 +1,11 @@
 use crate::{
     assets::*,
-    dialogue::{shake_texture, zoom_over_time}, gui::text_button::TextButton, types::GamePhase,
+    dialogue::{draw_clean_fullscreen, shake_texture, zoom_over_time}, gui::text_button::TextButton, types::GamePhase,
 };
 use macroquad::{
     audio::{
         load_sound, play_sound, play_sound_once, stop_sound, PlaySoundParams, Sound,
-    }, color::WHITE, math::vec2, texture::{draw_texture, load_texture, Texture2D}, window::{clear_background, next_frame, screen_height, screen_width}
+    }, math::vec2, texture::{load_texture, Texture2D}, window::{next_frame, screen_height, screen_width}
 };
 
 pub async fn scene1() -> GamePhase {
@@ -64,8 +64,7 @@ pub async fn scene1_options(music: &Sound) -> GamePhase {
     let mut play_clicks = 0;
 
     loop {
-        clear_background(WHITE);
-        draw_texture(&texture, 0.0, 0.0, WHITE);
+        draw_clean_fullscreen(&texture).await;
 
         let sleep_btn = TextButton::new("Ir a dormir", sleep_positions[dodge_idx], font_size);
         let (sleep_hovered, sleep_clicked) = sleep_btn.draw(pad);
@@ -74,7 +73,7 @@ pub async fn scene1_options(music: &Sound) -> GamePhase {
             dodge_idx += 1; // dodge next frame
         } else if sleep_clicked {
             scene1_electric_shock(music).await;
-            return GamePhase::scene1_shock;
+            return GamePhase::Scene1Shock;
         }
         
         let play_btn = TextButton::new("Seguir jugando", play_pos, font_size);
@@ -95,7 +94,7 @@ pub async fn scene1_options(music: &Sound) -> GamePhase {
                 4 => {
                     texture = scene1_irritated_eye(SCENE_1_IRRITATED_4, 4.5).await;
                 }
-                5 => return GamePhase::scene1_awake, // finished the chain
+                5 => return GamePhase::Scene1Awake, // finished the chain
                 _ => (),
             }
         }

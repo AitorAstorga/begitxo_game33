@@ -25,8 +25,11 @@ pub const SCENE_1_SHOCK_1: &str = "./img/begitxo_shock1.png";
 pub const SCENE_1_SHOCK_2: &str = "./img/begitxo_shock2.png";
 
 pub const SCENE_2_SUN: &str = "./img/begitxo_sun.png";
-
 pub const SCENE_2_RACE: &str = "./img/race/corridor.png";
+
+pub const SCENE_3_REALIZE_1 : &str = "./img/begitxo_realize1.png";
+pub const SCENE_3_REALIZE_2 : &str = "./img/begitxo_realize2.png";
+pub const SCENE_3_REALIZE_3 : &str = "./img/begitxo_realize3.png";
 
 // ==========================
 // Player Images
