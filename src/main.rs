@@ -1,5 +1,6 @@
 // src/main.rs
 mod gui;
+mod race;
 mod types;
 mod assets;
 mod dialogue;

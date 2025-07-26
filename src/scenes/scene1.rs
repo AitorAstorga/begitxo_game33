@@ -1,6 +1,6 @@
 use crate::{
     assets::*,
-    dialogue::{shake_texture, zoom_over_time}, gui::text_button::TextButton,
+    dialogue::{shake_texture, zoom_over_time}, gui::text_button::TextButton, types::GamePhase,
 };
 use macroquad::{
     audio::{
@@ -8,7 +8,7 @@ use macroquad::{
     }, color::WHITE, math::vec2, texture::{draw_texture, load_texture, Texture2D}, window::{clear_background, next_frame, screen_height, screen_width}
 };
 
-pub async fn scene1() {
+pub async fn scene1() -> GamePhase {
     let music = load_sound(SCENE_1_MUSIC).await.unwrap();
     play_sound(
         &music,
@@ -28,10 +28,12 @@ pub async fn scene1() {
     );
 
     scene1_zoom_from_back().await;
-    scene1_options(&music).await;
+    let result = scene1_options(&music).await;
 
     stop_sound(&music);
     stop_sound(&ambient_sound);
+
+    result
 }
 
 /// Zoom from the back of Begitxo
@@ -40,7 +42,8 @@ async fn scene1_zoom_from_back() {
     zoom_over_time(texture, 1.5, 3.0).await;
 }
 
-pub async fn scene1_options(music: &Sound) {
+/// Path to sleeping or staying awake
+pub async fn scene1_options(music: &Sound) -> GamePhase {
     let mut texture = load_texture(SCENE_1_BACK).await.unwrap();
 
     let font_size = 30;
@@ -71,7 +74,7 @@ pub async fn scene1_options(music: &Sound) {
             dodge_idx += 1; // dodge next frame
         } else if sleep_clicked {
             scene1_electric_shock(music).await;
-            break;
+            return GamePhase::scene1_shock;
         }
         
         let play_btn = TextButton::new("Seguir jugando", play_pos, font_size);
@@ -81,18 +84,18 @@ pub async fn scene1_options(music: &Sound) {
             play_clicks += 1;
             match play_clicks {
                 1 => {
-                    texture = scene1_irritated_eyes(SCENE_1_IRRITATED_1, 2.5).await;
+                    texture = scene1_irritated_eye(SCENE_1_IRRITATED_1, 2.5).await;
                 }
                 2 => {
-                    texture = scene1_irritated_eyes(SCENE_1_IRRITATED_2, 3.0).await;
+                    texture = scene1_irritated_eye(SCENE_1_IRRITATED_2, 3.0).await;
                 }
                 3 => {
-                    texture = scene1_irritated_eyes(SCENE_1_IRRITATED_3, 3.5).await;
+                    texture = scene1_irritated_eye(SCENE_1_IRRITATED_3, 3.5).await;
                 }
                 4 => {
-                    texture = scene1_irritated_eyes(SCENE_1_IRRITATED_4, 4.5).await;
+                    texture = scene1_irritated_eye(SCENE_1_IRRITATED_4, 4.5).await;
                 }
-                5 => break, // finished the chain
+                5 => return GamePhase::scene1_awake, // finished the chain
                 _ => (),
             }
         }
@@ -101,12 +104,14 @@ pub async fn scene1_options(music: &Sound) {
     }
 }
 
-async fn scene1_irritated_eyes(path: &str, duration: f32) -> Texture2D {
+/// Helper to zoom in the irritated eye
+async fn scene1_irritated_eye(path: &str, duration: f32) -> Texture2D {
     let texture = load_texture(path).await.unwrap();
     zoom_over_time(texture.clone(), 1.5, duration).await;
     texture
 }
 
+/// Electric shock
 async fn scene1_electric_shock(music: &Sound) {
     stop_sound(music);
 

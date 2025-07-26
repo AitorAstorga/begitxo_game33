@@ -21,12 +21,18 @@ fn draw_fullscreen(texture: &Texture2D, offset: Vec2, tint: Color) {
 }
 
 /// Draw the texture at its original size in the top‑left corner.
-async fn draw_clean_fullscreen(texture: &Texture2D) {
+pub async fn draw_clean_fullscreen(texture: &Texture2D) {
     clear_background(BLACK);
     draw_fullscreen(texture, Vec2::ZERO, WHITE);
     next_frame().await;
 }
 
+/// Draw an empty background with a text and the given colors and dimensions.
+async fn draw_text_background(text: &str, color: Color, pos: Vec2, font_size: f32) {
+    clear_background(BLACK);
+    draw_text(text, pos.x, pos.y, font_size, color);
+    next_frame().await;
+}
 
 /// ---------------------------------------------------------------------------
 /// Effects

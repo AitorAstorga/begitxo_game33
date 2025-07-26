@@ -26,6 +26,20 @@ pub const SCENE_1_SHOCK_2: &str = "./img/begitxo_shock2.png";
 
 pub const SCENE_2_SUN: &str = "./img/begitxo_sun.png";
 
+pub const SCENE_2_RACE: &str = "./img/race/corridor.png";
+
+// ==========================
+// Player Images
+// ==========================
+pub const SCENE_2_PLAYER: &str = "./img/begitxo_player.png";
+
+// ==========================
+// Obstacles
+// ==========================
+pub const SCENE_2_OBSTACLE: &str = "./img/missing_texture_TEST_35x50.png";
+pub const SCENE_2_OBSTACLE_1: &str = "./img/race/obstacle1.png";
+pub const SCENE_2_OBSTACLE_2: &str = "./img/race/obstacle2.png";
+
 
 // ==========================
 // Sounds
