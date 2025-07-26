@@ -73,10 +73,10 @@ Distributed under the European Union Public License v1.2. See `LICENSE` for more
 
 ## Contact
 
-Aitor Astorga Saez de Vicuña (aichan) - a.astorga.sdv@protonmail.com
-Jose Antonio Laserna Beltrán (Lassy) - SrL4s3rn4@proton.me
-Dalia Pujana Onaindia (Thadah) - daliapujana@protonmail.com
-Sky Robles Pugnaire (Sky) - apugnaire@proton.me
+- Aitor Astorga Saez de Vicuña (aichan) - a.astorga.sdv@protonmail.com
+- Jose Antonio Laserna Beltrán (Lassy) - SrL4s3rn4@proton.me
+- Dalia Pujana Onaindia (Thadah) - daliapujana@protonmail.com
+- Sky Robles Pugnaire (Sky) - apugnaire@proton.me
 
 Project Link: [https://github.com/AitorAstorga/begitxo_game33](https://github.com/AitorAstorga/begitxo_game33)
 
