@@ -9,7 +9,6 @@ use crate::{
 };
 
 pub async fn scene3() -> GamePhase {
-    // TO DO: All this code to scene3
     loop {
         draw_text_background(
                     "Begitxo sube al escenario y grita desesperado por que le ayuden a buscar sus gafas. (pulsa Enter para continuar)",
@@ -42,7 +41,7 @@ pub async fn scene3() -> GamePhase {
             break;
         }
     }
-    // TO DO: Create begitxo in escenario to be zoomed in
+    
     let begitxo_realize1 = load_texture(SCENE_3_REALIZE_1).await.unwrap();
     zoom_over_time(begitxo_realize1.clone(), 1.5, 2.0).await;
 

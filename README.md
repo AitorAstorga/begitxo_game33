@@ -8,7 +8,7 @@
 
 ## About The Project
 
-This project is a game built during the Fast FOSS competition of the Euskal Encounter 33. It features Begitxo —the mascot of the party— trying to find their sunglasses in a desperate attempt to save his vision and be able to keep gaming as usual.
+This project is a game built during the Fast FOSS competition of the Euskal Encounter 33. It features Begitxo —the mascot of the party— trying to find their sunglasses in a desperate attempt to save his vision and be able to keep gaming as usual. It is built with [Rust Macroquad](https://macroquad.rs/)!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -28,10 +28,33 @@ Follow these instructions to set up a local instance of BegitxoGame33.
     ```bash
     rustup target add wasm32-unknown-unknown
     ```
+- System Dependencies
+    ```bash
+    # ubuntu system dependencies
+    apt install pkg-config libx11-dev libxi-dev libgl1-mesa-dev libasound2-dev
+
+    # fedora system dependencies
+    dnf install libX11-devel libXi-devel mesa-libGL-devel alsa-lib-devel
+
+    # arch linux system dependencies
+    pacman -S pkg-config libx11 libxi mesa-libgl alsa-lib
+    ```
 - (Optional) Docker if you plan to deploy in a container
 
-## Contributing
+### Run natively
+Just execute this:
+```bash
+cargo run
+```
 
+A development window will be opened my `macroquad`.
+
+### Run in Docker
+Check out `docker-compose.yml`.
+
+<p align="right">(<a href="#contributing">back to top</a>)</p>
+
+## Contributing
 Contributions are welcome! Please fork the repository, make your changes, and open a pull request.
 
 1. Fork the Project
@@ -50,7 +73,10 @@ Distributed under the European Union Public License v1.2. See `LICENSE` for more
 
 ## Contact
 
-Aitor Astorga Saez de Vicuña - a.astorga.sdv@protonmail.com
+Aitor Astorga Saez de Vicuña (aichan) - a.astorga.sdv@protonmail.com
+Jose Antonio Laserna Beltrán (Lassy) - SrL4s3rn4@proton.me
+Dalia Pujana Onaindia (Thadah) - daliapujana@protonmail.com
+Sky Robles Pugnaire (Sky) - apugnaire@proton.me
 
 Project Link: [https://github.com/AitorAstorga/begitxo_game33](https://github.com/AitorAstorga/begitxo_game33)
 
@@ -74,6 +100,10 @@ Thanks to these nice projects!
 - **Computer Keyboard Sound Effect**:
     - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
     - URL: https://www.chosic.com/download-audio/54455/
+
+- **Electrical Shock Sound Effect**
+    - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+    - URL: https://freesound.org/people/BigKahuna360/sounds/160421/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
