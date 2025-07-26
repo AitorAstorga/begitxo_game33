@@ -105,6 +105,10 @@ Thanks to these nice projects!
     - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
     - URL: https://freesound.org/people/BigKahuna360/sounds/160421/
 
+- **Cicadas Sound Effect**
+    - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+    - URL: https://freesound.org/people/dethrok/sounds/272169/
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->

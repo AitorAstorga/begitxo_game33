@@ -49,6 +49,7 @@ pub const SCENE_1_MUSIC: &str = "./sound/scene1.ogg";
 pub const SCENE_1_AMBIENT: &str = "./sound/scene1_ambient.ogg";
 pub const SCENE_1_SHOCK_SOUND: &str = "./sound/scene1_electric_shock.ogg";
 pub const SCENE_2_AMBIENT: &str = "./sound/scene2_ambient.ogg";
+pub const SCENE_2_RACE_SOUND: &str = "./sound/scene2_race.ogg";
 
 // ==========================
 // Menu and Other UI Images

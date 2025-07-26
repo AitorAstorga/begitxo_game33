@@ -14,9 +14,9 @@ use crate::{
 pub async fn scene2() -> GamePhase {
     let mut game_phase: GamePhase = GamePhase::Scene2Dialogue;
 
-    let music = load_sound(SCENE_2_AMBIENT).await.unwrap();
+    let cicadas_sound = load_sound(SCENE_2_AMBIENT).await.unwrap();
     play_sound(
-        &music,
+        &cicadas_sound,
         PlaySoundParams {
             looped: false,
             volume: 1.0,
@@ -33,7 +33,7 @@ pub async fn scene2() -> GamePhase {
     let obstacle_tex_1  = load_texture(SCENE_2_OBSTACLE_1).await.unwrap();
     let obstacle_tex_2  = load_texture(SCENE_2_OBSTACLE_2).await.unwrap();
 
-    stop_sound(&music);
+    stop_sound(&cicadas_sound);
 
     loop {
         draw_text_background(
@@ -58,6 +58,15 @@ pub async fn scene2() -> GamePhase {
     srand(get_time() as u64);
     let mut obstacles: Vec<Obstacle> = Vec::new();
     let mut spawn_timer = 1.1 * ((rand() % 5 + 1) as f32);
+
+    let race_sound = load_sound(SCENE_2_RACE_SOUND).await.unwrap();
+    play_sound(
+        &race_sound,
+        PlaySoundParams {
+            looped: true,
+            volume: 1.0,
+        },
+    );
 
     loop {
         let dt = get_frame_time();
@@ -128,5 +137,6 @@ pub async fn scene2() -> GamePhase {
         }
         next_frame().await;
     }
+    stop_sound(&race_sound);
     game_phase
 }
